@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nifty Quant Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="bg-zinc-950 text-zinc-100">
+    <main class="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+      <header class="mb-5 flex flex-col gap-3 border-b border-zinc-800 pb-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h1 class="text-2xl font-semibold tracking-normal">Nifty Quant Dashboard</h1>
+          <p id="generatedAt" class="mt-1 text-sm text-zinc-400">Loading local analytics...</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <div class="date-chip"><span>Analysis till</span><strong id="analysisTill">-</strong></div>
+            <div class="date-chip accent"><span>Analysis for</span><strong id="analysisFor">-</strong></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
+          <div class="metric"><span>1Y ATH</span><strong id="ath1y">-</strong></div>
+          <div class="metric"><span>1Y ATL</span><strong id="atl1y">-</strong></div>
+          <div class="metric"><span>1M ATH</span><strong id="ath1m">-</strong></div>
+          <div class="metric"><span>1M ATL</span><strong id="atl1m">-</strong></div>
+        </div>
+      </header>
+
+      <section class="grid gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,0.8fr)]">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Nifty Price Structure</h2>
+            <span>1 year OHLC with ATH/ATL levels</span>
+          </div>
+          <div id="niftyChart" class="chart h-[520px]"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Regime Diagnostics</h2>
+            <span>Momentum vs mean reversion</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Window</th>
+                  <th>Regime</th>
+                  <th>Ret%</th>
+                  <th>Vol%</th>
+                </tr>
+              </thead>
+              <tbody id="regimeRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-4 grid gap-4 lg:grid-cols-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>5-Day Range Forecast</h2>
+            <span>EWMA volatility projection</span>
+          </div>
+          <div id="forecastChart" class="chart h-[420px]"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Nifty OI Strike Map</h2>
+            <span id="oiStatus">Waiting for Upstox artifact</span>
+          </div>
+          <div id="oiCharts" class="oi-chart-stack"></div>
+          <div id="oiChangePanels" class="oi-change-grid"></div>
+        </div>
+      </section>
+
+      <section class="mt-4 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Nifty 100 Breadth</h2>
+            <span>Constituent trend health</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="metric large"><span>Stocks</span><strong id="stocksLoaded">-</strong></div>
+            <div class="metric large"><span>Above 20DMA</span><strong id="above20">-</strong></div>
+            <div class="metric large"><span>Median 5D</span><strong id="median5d">-</strong></div>
+            <div class="metric large"><span>Median 20D</span><strong id="median20d">-</strong></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Quant Stock Scanner</h2>
+            <span id="scannerSummary">Mean reversion and momentum candidates</span>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <h3 class="subhead">Mean Reversion Setups</h3>
+              <div id="meanReversionList" class="rank-list"></div>
+            </div>
+            <div>
+              <h3 class="subhead">Momentum Continuation</h3>
+              <div id="momentumList" class="rank-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

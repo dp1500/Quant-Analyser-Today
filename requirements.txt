@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+yfinance
+python-dotenv
+pandas
+numpy
+scipy
+statsmodels
+scikit-learn
+plotly
+pyarrow
+fastparquet
+upstox-python-sdk
