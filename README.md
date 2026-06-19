@@ -36,7 +36,13 @@ Put a fresh Upstox token in `.env` only if you want option OI fetching. Do not c
 & 'D:\upstocks data fetch  jan 2025\venv\Scripts\python.exe' scripts\update_data.py
 ```
 
-2. Start the dashboard:
+2. Build the static GitHub Pages files:
+
+```powershell
+& 'D:\upstocks data fetch  jan 2025\venv\Scripts\python.exe' scripts\build_static_site.py
+```
+
+3. Start the local backend dashboard, optional:
 
 ```powershell
 & 'D:\upstocks data fetch  jan 2025\venv\Scripts\python.exe' -m uvicorn app.main:app --reload --port 8000
@@ -64,3 +70,10 @@ http://127.0.0.1:8000
 - `data/processed/dashboard_payload.json`
 
 The frontend only reads the processed JSON through the backend.
+
+For GitHub Pages, the publishable static files are copied to the repository root:
+
+- `index.html`
+- `static/app.js`
+- `static/styles.css`
+- `dashboard_payload.json`
